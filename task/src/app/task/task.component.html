@@ -1,0 +1,47 @@
+
+<h1>All Tasks here</h1>
+<div *ngIf="tasks">
+<div *ngFor="let task of tasks">
+	
+	<p>Title: {{task.title}}</p>
+	Description: {{task.description}}
+	Completed: {{task.completed}}
+	<button (click)="edit(task._id)" value="{{task._id}}">Edit</button>
+	<button (click)="destroy(task._id)" value="{{task._id}}">Delete</button>
+	<button (click)="show(task._id)" value="{{task._id}}">Show</button>
+</div>
+</div>
+<p *ngIf='!title.valid' style="color: red">You must enter title</p>
+<form (submit)="create()">
+	Title:<input type="text" 
+	[(ngModel)]='createdtask.title' 
+	name='createdtask.title'
+	required
+	maxlength="5"
+	#title="ngModel" 
+
+	><br>
+	Description:<input type="text" [(ngModel)]='createdtask.description' name='createdtask.description'><br>
+	Completed:<input type="checkbox" [(ngModel)]='createdtask.completed' name='createdtask.completed'><br>
+	<input type="submit" value="Create">
+
+	
+</form>
+
+<form (submit)="update()" *ngIf="id != null">
+
+	<input type="text" [(ngModel)]='edittask.title' name='edittask.title' value="{{edittask.title}}">
+	<input type="text" [(ngModel)]='edittask.description' name='edittask.description'>
+	<input type="checkbox"[(ngModel)]='edittask.completed' name='edittask.completed'>
+	<input type="submit" Value="Update">
+
+	
+</form>
+
+
+ 
+<div *ngIf="task">
+<p>{{task.title}}</p>
+<p>{{task.description}}</p>
+<p>{{task.completed}}</p>
+</div>
